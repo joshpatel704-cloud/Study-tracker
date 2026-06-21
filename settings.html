@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyMaster — Settings & Goals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col md:flex-row">
+    <!-- Mobile Hamburger Toggle Header -->
+    <header class="md:hidden glass w-full h-16 flex items-center justify-between px-6 border-b border-slate-200/50 dark:border-slate-800/50 sticky top-0 z-40">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-violet-600 flex items-center justify-center text-white text-xs font-bold shadow-lg">
+          <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+        </div>
+        <span class="text-md font-bold font-sans tracking-tight">StudyMaster</span>
+      </div>
+      <button type="button" id="btnMobileMenuToggle" class="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50">
+        <i data-lucide="menu" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i>
+      </button>
+    </header>
+
+    <!-- Sidebar Navigation Drawer -->
+    <aside id="sidebarDrawer" class="hidden md:flex w-64 glass border-r border-slate-200/50 dark:border-slate-800/50 flex-col shrink-0 fixed inset-y-0 left-0 z-50 md:relative md:translate-x-0 transition duration-200">
+      <div class="h-16 border-b border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between px-6">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20">
+            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+          </div>
+          <span class="text-xl font-bold font-sans tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">StudyMaster</span>
+        </div>
+        <button id="btnMobileMenuClose" class="md:hidden text-slate-500 hover:text-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-6 border-b border-slate-200/40 dark:border-slate-800/40">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-600/10 text-blue-600 font-bold text-sm flex items-center justify-center" id="lblSidebarInitials">SM</div>
+          <div class="overflow-hidden min-w-0">
+            <h4 class="text-sm font-semibold truncate text-slate-800 dark:text-slate-200" id="lblHeaderUser">Scholar</h4>
+            <p class="text-[10px] text-slate-400 font-mono tracking-wider uppercase">Active Session</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+        <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-950 text-slate-600 dark:text-slate-300 font-medium rounded-xl text-sm transition">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+        </a>
+        <a href="schedule.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-950 text-slate-600 dark:text-slate-300 font-medium rounded-xl text-sm transition">
+          <i data-lucide="calendar-range" class="w-4 h-4"></i> Weekly Schedule
+        </a>
+        <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-950 text-slate-600 dark:text-slate-300 font-medium rounded-xl text-sm transition">
+          <i data-lucide="history" class="w-4 h-4"></i> Study History
+        </a>
+        <a href="analytics.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-300 font-medium rounded-xl text-sm transition">
+          <i data-lucide="line-chart" class="w-4 h-4"></i> Analytics
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 bg-blue-50/60 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-medium rounded-xl text-sm transition font-sans">
+          <i data-lucide="settings" class="w-4 h-4"></i> Settings & Goals
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-200/50 dark:border-slate-800/50">
+        <button id="btnLogout" class="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 dark:hover:bg-red-950/20 text-red-600 dark:text-red-400 font-semibold rounded-xl text-sm transition">
+          <i data-lucide="log-out" class="w-4 h-4"></i> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <main class="flex-1 p-6 md:p-8 overflow-y-auto space-y-8">
+      <div>
+        <h1 class="text-3xl font-extrabold font-sans tracking-tight text-slate-900 dark:text-white">Workspace Configuration</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Alter settings parameters, update profile variables and study targets</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-4xl pb-12">
+        <!-- Forms settings -->
+        <div class="lg:col-span-8 space-y-6">
+          <div id="settingsAlertBox" class="hidden p-4 rounded-xl text-xs font-semibold border"></div>
+
+          <!-- Section A: Account Information -->
+          <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-6 space-y-4">
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+              <i data-lucide="user" class="w-4 h-4 text-blue-500"></i> Profile Information
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="txtProfileName">Full Display Name</label>
+                <input type="text" id="txtProfileName" class="w-full px-3 py-2 bg-slate-100/50 dark:bg-slate-900/50 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500" />
+              </div>
+              <div class="space-y-1">
+                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="txtProfileEmail">Registered Email</label>
+                <input type="email" id="txtProfileEmail" disabled class="w-full px-3 py-2 bg-slate-100/30 dark:bg-slate-900/20 text-slate-400 cursor-not-allowed text-xs rounded-xl border border-slate-200/50 focus:outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Section B: Study Milestone Durations Targets -->
+          <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-6 space-y-4">
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+              <i data-lucide="target" class="w-4 h-4 text-purple-500"></i> Milestone Study Targets
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- Item 1 -->
+              <div class="space-y-1">
+                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="numDailyGoal">Daily Goal (Hours)</label>
+                <input type="number" min="0.5" max="24" step="0.5" id="numDailyGoal" class="w-full px-3 py-2 bg-slate-100/50 dark:bg-slate-900/50 text-xs rounded-xl border font-mono focus:outline-none focus:border-blue-500" />
+              </div>
+              <!-- Item 2 -->
+              <div class="space-y-1">
+                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="numWeeklyGoal">Weekly Goal (Hours)</label>
+                <input type="number" min="1" max="168" id="numWeeklyGoal" class="w-full px-3 py-2 bg-slate-100/50 dark:bg-slate-900/50 text-xs rounded-xl border font-mono focus:outline-none focus:border-blue-500" />
+              </div>
+              <!-- Item 3 -->
+              <div class="space-y-1">
+                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="numMonthlyGoal">Monthly Target (Hours)</label>
+                <input type="number" min="5" max="720" id="numMonthlyGoal" class="w-full px-3 py-2 bg-slate-100/50 dark:bg-slate-900/50 text-xs rounded-xl border font-mono focus:outline-none focus:border-blue-500" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Master save button -->
+          <div class="flex justify-end pt-2">
+            <button id="btnSaveAllSettings" class="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white font-medium rounded-xl text-xs shadow-md transition duration-150">
+              Update Preferences & Keep Profiles
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Side layout features (Theme config) -->
+        <div class="lg:col-span-4 space-y-6">
+          <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 p-6 space-y-4">
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+              <i data-lucide="palette" class="w-4 h-4 text-emerald-500"></i> Visual Aesthetics
+            </h3>
+
+            <div class="space-y-3 pt-1">
+              <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Aesthetics palette</span>
+              <div class="grid grid-cols-2 gap-2">
+                <!-- Light btn -->
+                <button type="button" id="btnThemeLight" class="flex flex-col items-center justify-center p-4 rounded-xl border border-slate-200 hover:bg-slate-100/50 dark:hover:bg-slate-900/50 transition">
+                  <i data-lucide="sun" class="w-5 h-5 text-amber-500 mb-1"></i>
+                  <span class="text-[10px] font-bold uppercase tracking-wider">Light Theme</span>
+                </button>
+                <!-- Dark btn -->
+                <button type="button" id="btnThemeDark" class="flex flex-col items-center justify-center p-4 rounded-xl border border-slate-200 hover:bg-slate-100/50 dark:hover:bg-slate-900/50 transition bg-slate-100/50">
+                  <i data-lucide="moon" class="w-5 h-5 text-indigo-500 mb-1"></i>
+                  <span class="text-[10px] font-bold uppercase tracking-wider">Deep Slate</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Dynamic settings execution handles script -->
+    <script type="module">
+      import { monitorAuth, updateAuthProfile, getCurrentUser } from './js/auth.js';
+      import { getUserProfile, updateUserProfile } from './js/db-helper.js';
+
+      let activeUser = null;
+      let activeUserProfile = null;
+
+      document.addEventListener('DOMContentLoaded', () => {
+        monitorAuth(
+          async (user) => {
+            activeUser = user;
+            setupSidebarProfile();
+            await fetchUserProfile();
+          },
+          () => {
+            window.location.href = 'login.html';
+          }
+        );
+
+        // Sidebar responsive tags
+        const btnMobToggle = document.getElementById('btnMobileMenuToggle');
+        const btnMobClose = document.getElementById('btnMobileMenuClose');
+        const sideDrawer = document.getElementById('sidebarDrawer');
+        if (btnMobToggle) {
+          btnMobToggle.addEventListener('click', () => {
+            sideDrawer.classList.remove('hidden');
+            sideDrawer.classList.add('flex');
+          });
+        }
+        if (btnMobClose) {
+          btnMobClose.addEventListener('click', () => {
+            sideDrawer.classList.add('hidden');
+            sideDrawer.classList.remove('flex');
+          });
+        }
+
+        // Action Settings triggers
+        document.getElementById('btnSaveAllSettings').addEventListener('click', saveSettingsPreferences);
+        document.getElementById('btnThemeLight').addEventListener('click', () => changeThemePreference('light'));
+        document.getElementById('btnThemeDark').addEventListener('click', () => changeThemePreference('dark'));
+      });
+
+      function setupSidebarProfile() {
+        const lblHeaderUser = document.getElementById('lblHeaderUser');
+        if (lblHeaderUser) {
+          lblHeaderUser.textContent = activeUser.displayName;
+        }
+        const lblSidebarInitials = document.getElementById('lblSidebarInitials');
+        if (lblSidebarInitials && activeUser.displayName) {
+          lblSidebarInitials.textContent = activeUser.displayName.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0, 2);
+        }
+      }
+
+      async function fetchUserProfile() {
+        if (!activeUser) return;
+        activeUserProfile = await getUserProfile(activeUser.uid);
+
+        // Populate fields
+        document.getElementById('txtProfileName').value = activeUserProfile.name || activeUser.displayName || '';
+        document.getElementById('txtProfileEmail').value = activeUserProfile.email || activeUser.email || '';
+
+        document.getElementById('numDailyGoal').value = activeUserProfile.dailyGoal || 6;
+        document.getElementById('numWeeklyGoal').value = activeUserProfile.weeklyGoal || 40;
+        document.getElementById('numMonthlyGoal').value = activeUserProfile.monthlyGoal || 160;
+
+        // Apply theme button classes visual adjustments
+        updateThemeButtonsUI(activeUserProfile.theme || 'light');
+      }
+
+      function updateThemeButtonsUI(theme) {
+        const btnL = document.getElementById('btnThemeLight');
+        const btnD = document.getElementById('btnThemeDark');
+
+        if (theme === 'dark') {
+          btnD.className = "flex flex-col items-center justify-center p-4 rounded-xl border-2 border-violet-500 bg-slate-900/60 transition flex-1 text-violet-400";
+          btnL.className = "flex flex-col items-center justify-center p-4 rounded-xl border border-slate-200 hover:bg-slate-250 dark:hover:bg-slate-900/50 transition flex-1 text-slate-400";
+          document.documentElement.classList.add('dark');
+        } else {
+          btnL.className = "flex flex-col items-center justify-center p-4 rounded-xl border-2 border-blue-500 bg-white transition flex-1 text-blue-600";
+          btnD.className = "flex flex-col items-center justify-center p-4 rounded-xl border border-slate-200 hover:bg-slate-100/50 dark:hover:bg-slate-900/50 transition flex-1 text-slate-400";
+          document.documentElement.classList.remove('dark');
+        }
+      }
+
+      async function changeThemePreference(theme) {
+        if (!activeUser) return;
+        try {
+          updateThemeButtonsUI(theme);
+          await updateUserProfile(activeUser.uid, { theme });
+          showNotification("Theme altered successfully across Workspace!", true);
+        } catch (e) {
+          showNotification("Failed triggering workspace theme: " + e.message);
+        }
+      }
+
+      function showNotification(msg, isSuccess = false) {
+        const alertBox = document.getElementById('settingsAlertBox');
+        alertBox.textContent = msg;
+        alertBox.className = `p-4 rounded-xl text-xs font-semibold border ${
+          isSuccess 
+            ? 'bg-green-100/60 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800/40' 
+            : 'bg-red-100/60 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800/40'
+        }`;
+        alertBox.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      async function saveSettingsPreferences() {
+        const nameVal = document.getElementById('txtProfileName').value.trim();
+        const dailyGoal = parseFloat(document.getElementById('numDailyGoal').value) || 6;
+        const weeklyGoal = parseFloat(document.getElementById('numWeeklyGoal').value) || 40;
+        const monthlyGoal = parseFloat(document.getElementById('numMonthlyGoal').value) || 160;
+
+        if (!nameVal) {
+          showNotification("A target account user display name is mandatory.");
+          return;
+        }
+
+        try {
+          showNotification("Synchronizing credential servers...", true);
+          
+          // 1. Sync Firebase Display Name
+          await updateAuthProfile(nameVal);
+
+          // 2. Sync profile attributes
+          await updateUserProfile(activeUser.uid, {
+            name: nameVal,
+            dailyGoal,
+            weeklyGoal,
+            monthlyGoal
+          });
+
+          setupSidebarProfile();
+          showNotification("Settings profile targets synchronised successfully!", true);
+        } catch (e) {
+          showNotification("Failed updating user preferences: " + e.message);
+        }
+      }
+    </script>
+  </body>
+</html>

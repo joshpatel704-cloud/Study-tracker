@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyMaster — Weekly Schedule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col md:flex-row">
+    <!-- Mobile Hamburger Toggle Header -->
+    <header class="md:hidden glass w-full h-16 flex items-center justify-between px-6 border-b border-slate-200/50 dark:border-slate-800/50 sticky top-0 z-40">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-violet-600 flex items-center justify-center text-white text-xs font-bold shadow-lg">
+          <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+        </div>
+        <span class="text-md font-bold font-sans tracking-tight">StudyMaster</span>
+      </div>
+      <button type="button" id="btnMobileMenuToggle" class="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50">
+        <i data-lucide="menu" class="w-5 h-5 text-slate-600 dark:text-slate-300"></i>
+      </button>
+    </header>
+
+    <!-- Sidebar Navigation Drawer -->
+    <aside id="sidebarDrawer" class="hidden md:flex w-64 glass border-r border-slate-200/50 dark:border-slate-800/50 flex-col shrink-0 fixed inset-y-0 left-0 z-50 md:relative md:translate-x-0 transition duration-200">
+      <div class="h-16 border-b border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between px-6">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20">
+            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+          </div>
+          <span class="text-xl font-bold font-sans tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">StudyMaster</span>
+        </div>
+        <button id="btnMobileMenuClose" class="md:hidden text-slate-500 hover:text-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-6 border-b border-slate-200/40 dark:border-slate-800/40">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-600/10 text-blue-600 font-bold text-sm flex items-center justify-center" id="lblSidebarInitials">SM</div>
+          <div class="overflow-hidden min-w-0">
+            <h4 class="text-sm font-semibold truncate text-slate-800 dark:text-slate-200" id="lblHeaderUser">Scholar</h4>
+            <p class="text-[10px] text-slate-400 font-mono tracking-wider uppercase">Active Session</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+        <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-950 text-slate-600 dark:text-slate-300 font-medium rounded-xl text-sm transition">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+        </a>
+        <a href="schedule.html" class="flex items-center gap-3 px-4 py-2.5 bg-blue-50/60 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-medium rounded-xl text-sm transition font-sans">
+          <i data-lucide="calendar-range" class="w-4 h-4"></i> Weekly Schedule
+        </a>
+        <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-300 font-medium rounded-xl text-sm transition animate-none">
+          <i data-lucide="history" class="w-4 h-4"></i> Study History
+        </a>
+        <a href="analytics.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-300 font-medium rounded-xl text-sm transition">
+          <i data-lucide="line-chart" class="w-4 h-4"></i> Analytics
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-300 font-medium rounded-xl text-sm transition">
+          <i data-lucide="settings" class="w-4 h-4"></i> Settings & Goals
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-200/50 dark:border-slate-800/50">
+        <button id="btnLogout" class="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 dark:hover:bg-red-950/20 text-red-600 dark:text-red-400 font-semibold rounded-xl text-sm transition">
+          <i data-lucide="log-out" class="w-4 h-4"></i> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="flex-1 p-6 md:p-8 overflow-y-auto space-y-8">
+      <div>
+        <h1 class="text-3xl font-extrabold font-sans tracking-tight text-slate-900 dark:text-white">Syllabus & Planner</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Design daily schedule slots, map courses, and outline targets</p>
+      </div>
+
+      <!-- Weekly days grids -->
+      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-5 pb-12">
+        
+        <!-- MONDAY -->
+        <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-4 flex flex-col justify-between min-h-[300px]">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">Monday</h3>
+                <span id="total-Monday" class="text-[10px] font-mono text-slate-400">0 Hours</span>
+              </div>
+              <button class="btn-add-day-sch p-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg transition" data-day="Monday">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <!-- Entries list -->
+            <div class="space-y-3" id="list-Monday"></div>
+          </div>
+        </div>
+
+        <!-- TUESDAY -->
+        <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-4 flex flex-col justify-between min-h-[300px]">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">Tuesday</h3>
+                <span id="total-Tuesday" class="text-[10px] font-mono text-slate-400">0 Hours</span>
+              </div>
+              <button class="btn-add-day-sch p-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg transition" data-day="Tuesday">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <!-- Entries list -->
+            <div class="space-y-3" id="list-Tuesday"></div>
+          </div>
+        </div>
+
+        <!-- WEDNESDAY -->
+        <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-4 flex flex-col justify-between min-h-[300px]">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">Wednesday</h3>
+                <span id="total-Wednesday" class="text-[10px] font-mono text-slate-400">0 Hours</span>
+              </div>
+              <button class="btn-add-day-sch p-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg transition" data-day="Wednesday">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <!-- Entries list -->
+            <div class="space-y-3" id="list-Wednesday"></div>
+          </div>
+        </div>
+
+        <!-- THURSDAY -->
+        <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-4 flex flex-col justify-between min-h-[300px]">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">Thursday</h3>
+                <span id="total-Thursday" class="text-[10px] font-mono text-slate-400">0 Hours</span>
+              </div>
+              <button class="btn-add-day-sch p-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg transition" data-day="Thursday">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <!-- Entries list -->
+            <div class="space-y-3" id="list-Thursday"></div>
+          </div>
+        </div>
+
+        <!-- FRIDAY -->
+        <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-4 flex flex-col justify-between min-h-[300px]">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">Friday</h3>
+                <span id="total-Friday" class="text-[10px] font-mono text-slate-400">0 Hours</span>
+              </div>
+              <button class="btn-add-day-sch p-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg transition" data-day="Friday">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <!-- Entries list -->
+            <div class="space-y-3" id="list-Friday"></div>
+          </div>
+        </div>
+
+        <!-- SATURDAY -->
+        <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-4 flex flex-col justify-between min-h-[300px]">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">Saturday</h3>
+                <span id="total-Saturday" class="text-[10px] font-mono text-slate-400">0 Hours</span>
+              </div>
+              <button class="btn-add-day-sch p-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg transition" data-day="Saturday">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <!-- Entries list -->
+            <div class="space-y-3" id="list-Saturday"></div>
+          </div>
+        </div>
+
+        <!-- SUNDAY -->
+        <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-sm p-4 flex flex-col justify-between min-h-[300px]">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">Sunday</h3>
+                <span id="total-Sunday" class="text-[10px] font-mono text-slate-400">0 Hours</span>
+              </div>
+              <button class="btn-add-day-sch p-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg transition" data-day="Sunday">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <!-- Entries list -->
+            <div class="space-y-3" id="list-Sunday"></div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- ================= ADD / EDIT SCHEDULE PERIOD POPUP MODAL ================= -->
+    <div id="scheduleModalOverlay" class="hidden fixed inset-0 z-50 bg-slate-950/40 backdrop-blur-md items-center justify-center p-4">
+      <div class="w-full max-w-sm glass-card rounded-2xl p-6 border border-slate-200/40 dark:border-slate-800/40 shadow-2xl space-y-5 animate-in fade-in-50 zoom-in-95 duration-100">
+        <h3 id="lblModalTitle" class="text-lg font-bold text-slate-900 dark:text-white">Add Planned Study Slot</h3>
+
+        <form id="frmSchedule" class="space-y-4">
+          <!-- Day select -->
+          <div class="space-y-1">
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-widest" for="schDaySelect">Target Day</label>
+            <select id="schDaySelect" class="w-full px-3 py-2 bg-slate-100/50 dark:bg-slate-900/50 text-sm rounded-xl border border-slate-200 dark:border-slate-800 focus:outline-none focus:border-blue-500">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+          </div>
+
+          <!-- Subject name select/type -->
+          <div class="space-y-1">
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-widest" for="schSubjectInput">Syllabus Subject</label>
+            <select id="schSubjectInput" class="w-full px-3 py-2 bg-slate-100/50 dark:bg-slate-900/50 text-sm rounded-xl border border-slate-200 dark:border-slate-800 focus:outline-none focus:border-blue-500">
+              <option value="ADA">ADA (Analysis & Design of Algorithms)</option>
+              <option value="DSA">DSA (Data Structures & Algorithms)</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Web Development">Web Development</option>
+              <option value="DM">DM (Discrete Mathematics)</option>
+              <option value="Other">Other Subjects</option>
+            </select>
+          </div>
+
+          <!-- Planned Hours -->
+          <div class="space-y-1">
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-widest" for="schHoursInput">Planned daily Hours</label>
+            <input type="number" step="0.5" min="0.5" max="24" id="schHoursInput" required class="w-full px-3 py-2 bg-slate-100/50 dark:bg-slate-900/50 rounded-xl text-sm border focus:outline-none focus:border-blue-500 font-mono" />
+          </div>
+
+          <!-- Button block -->
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <button type="button" id="btnCancelSch" class="py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-slate-300 font-semibold rounded-xl text-xs transition">Cancel</button>
+            <button type="submit" id="btnSubmitSch" class="py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition">Save Planned Slot</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Active dynamic logic script module -->
+    <script type="module" src="/js/schedule.js"></script>
+    <script type="module">
+      const btnMobToggle = document.getElementById('btnMobileMenuToggle');
+      const sideDrawer = document.getElementById('sidebarDrawer');
+      const btnMobClose = document.getElementById('btnMobileMenuClose');
+
+      if (btnMobToggle && sideDrawer) {
+        btnMobToggle.addEventListener('click', () => {
+          sideDrawer.classList.remove('hidden');
+          sideDrawer.classList.add('flex');
+        });
+      }
+      if (btnMobClose && sideDrawer) {
+        btnMobClose.addEventListener('click', () => {
+          sideDrawer.classList.add('hidden');
+          sideDrawer.classList.remove('flex');
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyMaster — Log In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col justify-center items-center p-4">
+    <!-- Glowing background elements -->
+    <div class="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-violet-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="w-full max-w-md relative z-10">
+      <!-- Logo Header -->
+      <div class="text-center mb-8">
+        <a href="index.html" class="inline-flex items-center gap-3 justify-center mb-4">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20">
+            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+          </div>
+          <span class="text-2xl font-bold font-sans tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">StudyMaster</span>
+        </a>
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Welcome back, Scholar</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Access your personalized study portal</p>
+      </div>
+
+      <!-- Main Login Card -->
+      <div class="glass-card rounded-2xl p-8 border border-slate-200/50 dark:border-slate-800/50 shadow-xl">
+        <form id="loginForm" class="space-y-5">
+          <!-- Notification alerts -->
+          <div id="alertBox" class="hidden p-4 text-xs font-medium rounded-xl border"></div>
+
+          <!-- Email -->
+          <div class="space-y-1.5">
+            <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="email">Email Address</label>
+            <div class="relative">
+              <i data-lucide="mail" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 text-slate-400"></i>
+              <input type="email" id="email" required placeholder="name@domain.com" class="w-full pl-10 pr-4 py-2.5 bg-slate-100/50 dark:bg-slate-900/50 focus:bg-white dark:focus:bg-slate-900 rounded-xl text-sm border border-slate-200/50 dark:border-slate-800/50 focus:border-blue-500/50 focus:outline-none transition duration-150" />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-center">
+              <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="password">Password</label>
+              <button type="button" id="btnForgot" class="text-xs text-blue-600 hover:text-blue-500 hover:underline">Forgot?</button>
+            </div>
+            <div class="relative">
+              <i data-lucide="lock" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 text-slate-400"></i>
+              <input type="password" id="password" required placeholder="••••••••" class="w-full pl-10 pr-10 py-2.5 bg-slate-100/50 dark:bg-slate-900/50 focus:bg-white dark:focus:bg-slate-900 rounded-xl text-sm border border-slate-200/50 dark:border-slate-800/50 focus:border-blue-500/50 focus:outline-none transition duration-150" />
+              <button type="button" id="togglePassword" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                <i data-lucide="eye" id="eyeIcon" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Keep me signed in -->
+          <div class="flex items-center justify-between pt-1">
+            <label class="flex items-center gap-2 cursor-pointer no-select">
+              <input type="checkbox" id="rememberMe" class="rounded text-blue-600 focus:ring-blue-500/30 w-4 h-4" />
+              <span class="text-xs text-slate-500 dark:text-slate-400">Remember Me</span>
+            </label>
+          </div>
+
+          <!-- Action block -->
+          <button type="submit" id="btnSubmit" class="w-full py-3 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white font-medium rounded-xl text-sm shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 hover:-translate-y-[1px] transition-all duration-150 flex items-center justify-center gap-2">
+            Sign In <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <div class="mt-6 pt-6 border-t border-slate-200/50 dark:border-slate-800/50 text-center text-xs text-slate-400">
+          <span>New to StudyMaster? </span>
+          <a href="signup.html" class="text-blue-600 hover:text-blue-500 font-semibold">Create account</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active dynamic logic script module -->
+    <script type="module">
+      import { loginUser, resetPassword, getCurrentUser } from './js/auth.js';
+
+      // Auto check logged in state
+      if (getCurrentUser()) {
+        window.location.href = 'dashboard.html';
+      }
+
+      const form = document.getElementById('loginForm');
+      const alertBox = document.getElementById('alertBox');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const togglePasswordBtn = document.getElementById('togglePassword');
+      const eyeIcon = document.getElementById('eyeIcon');
+      const btnForgot = document.getElementById('btnForgot');
+      const rememberCheckbox = document.getElementById('rememberMe');
+
+      // Prefill remember-me configuration if present
+      const cached = localStorage.getItem('studymaster_remember_me');
+      if (cached) {
+        emailInput.value = cached;
+        rememberCheckbox.checked = true;
+      }
+
+      // Password visibility toggles
+      togglePasswordBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        eyeIcon.setAttribute('data-lucide', isPassword ? 'eye-off' : 'eye');
+        lucide.createIcons();
+      });
+
+      // Handle custom alerts
+      function showAlert(msg, isSuccess = false) {
+        alertBox.textContent = msg;
+        alertBox.className = `p-4 text-xs font-medium rounded-xl border ${
+          isSuccess 
+            ? 'bg-green-100/60 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800/40' 
+            : 'bg-red-100/60 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800/40'
+        }`;
+        alertBox.classList.remove('hidden');
+      }
+
+      // Login trigger
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        alertBox.classList.add('hidden');
+        
+        const em = emailInput.value.trim();
+        const pw = passwordInput.value;
+        const remember = rememberCheckbox.checked;
+
+        if (!em || !pw) {
+          showAlert("Please enter your complete credentials.");
+          return;
+        }
+
+        try {
+          showAlert("Verifying account profile...", true);
+          await loginUser(em, pw, remember);
+          window.location.href = 'dashboard.html';
+        } catch (err) {
+          showAlert(err.message || "Failed to log in. Please double-check credentials.");
+        }
+      });
+
+      // Password Reset trigger
+      btnForgot.addEventListener('click', async () => {
+        const emailVal = emailInput.value.trim();
+        if (!emailVal) {
+          showAlert("Please input your email address above to receive reset instructions.");
+          return;
+        }
+        try {
+          await resetPassword(emailVal);
+          showAlert("Password reset link sent! Check your inbox.", true);
+        } catch (e) {
+          showAlert(e.message || "Could not issue password reset. Verify email.");
+        }
+      });
+
+      // Render Lucide
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
