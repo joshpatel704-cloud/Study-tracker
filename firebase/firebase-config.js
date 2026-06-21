@@ -3,13 +3,13 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  projectId: "level-cortex-qdzmz",
-  appId: "1:959604329402:web:1549085a9957805c42eb83",
-  apiKey: "AIzaSyBWWkRV5-9eAqd7h7QBx4BY0SeoIAjRJSs",
-  authDomain: "level-cortex-qdzmz.firebaseapp.com",
-  firestoreDatabaseId: "ai-studio-4e87b386-6086-40cf-ab05-9e64790e1b89",
-  storageBucket: "level-cortex-qdzmz.firebasestorage.app",
-  messagingSenderId: "959604329402",
+  projectId: "study-tracker-282e2",
+  appId: "1:1091617050976:web:14e7ef02a48af411478e05",
+  apiKey: "AIzaSyDUC5TO-u-XvKtj25gUzmF-A4U3C3_rFVw",
+  authDomain: "study-tracker-282e2.firebaseapp.com",
+  storageBucket: "study-tracker-282e2.firebasestorage.app",
+  messagingSenderId: "1091617050976",
+  measurementId: "G-EV1BVBYQE7"
 };
 
 let app;
@@ -20,7 +20,11 @@ let isFirebaseAvailable = false;
 try {
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
-  db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+  if (firebaseConfig.firestoreDatabaseId) {
+    db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+  } else {
+    db = getFirestore(app);
+  }
   isFirebaseAvailable = true;
 } catch (error) {
   console.error("Firebase initializing failed, falling back to LocalStorage:", error);
