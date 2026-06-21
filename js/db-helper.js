@@ -33,7 +33,7 @@ export async function getUserProfile(userId) {
     lastStudyDate: '',
     examDate: '',
     examTitle: '',
-    theme: 'light',
+    theme: 'dark',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   };
